@@ -113,7 +113,7 @@ foreach ($Response as $v) {
 }
 
 // Отправка уведомления на почту
-$to = 'mrleon727@gmail.com';
+$to = 'order@salesgenerator.pro';
 $subject = 'Заявка Красуцкий А.';
 $message = 'Email: ' . $email . PHP_EOL . 'Телефон: ' . $phone . PHP_EOL;
 $headers = 'From: Artem_Krasutskii@ar-tem.ru' . "\r\n";
