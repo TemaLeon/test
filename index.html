@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.ico">
+    <title>Тестовое задание</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: transparent;
+            font-family: "Roboto";
+        }
+        .popup-button {
+            box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.8);
+            border-radius: 5px;
+            background-color: #ff0000;
+            width: 235px;
+            height: 70px;
+            color: white;
+            font-size: 20px;
+            border: none;
+            cursor: pointer;
+        }
+        .popup-button:hover {
+            box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+        }
+        .text-click {
+            position: relative;
+            color: white;
+            font-size: 20px;
+        }
+        .popup-button:hover  .text-click {
+            top: 1px;
+        }
+        .popup {
+            height: 555px;
+            border-radius: 27px;
+            width: 909px;
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            z-index: 999;
+        }
+        .popup-form {
+            position: absolute;
+            display: inline-flex;
+            flex-direction: column;
+            bottom: 99px;
+            right: 52px;
+        }
+        .exit {
+            float: right;
+            margin: 21px 19px;
+            cursor: pointer;
+        }
+        h1 {
+            position: absolute;
+            font-weight: bold;
+            font-size: 29.37pt;
+            left: 53px;
+            top: 63px;
+            margin: 0;
+            opacity: 0.8;
+        }
+        .docs {
+            display: flex;
+            position: absolute;
+            top: 193px;
+            left: 53px;
+        }
+        .books {
+            width: 424px;
+            height: 302px;
+            position: absolute;
+            bottom: -5px;
+            left: 30px;
+        }
+        label {
+            font-size: 11.4pt;
+            font-weight: 600;
+            opacity: 0.8;
+            margin: 23px 0 10px;
+        }
+        input {
+            height: 53px;
+            padding: 0 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14.88pt;
+            padding: 0 20px;
+        }
+        input:focus {
+            outline: none;
+        }
+        .submit-button {
+            width: 350px;
+            height: 72px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 20pt;
+            margin-top: 15px;
+            background: linear-gradient(to bottom, #37db73, #3cc36d);
+            overflow: hidden;
+        }
+        .submit-button::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 71px;
+            background-color: #36aa60;
+            border-radius: 5px 5px 11px 11px;
+            z-index: -1;
+            bottom: -6px;
+        }
+        input.success ~ input.success ~ .submit-button:hover{
+            background: none;
+            cursor: pointer;
+        }
+        input.success ~ input.success ~ .submit-button:hover .text-button {
+            position: relative;
+            bottom: -6px;
+        }
+        .hand {
+            vertical-align: middle;
+            margin-left: 15px;
+        }
+        .pdf {
+            word-spacing: -1px;
+            margin: 0 47px;
+            font-size: 8.35pt;
+            color: #808080;
+            position: absolute;
+            bottom: -31px;
+        }
+        .pdf span{
+            margin-left: 17px;
+        }
+        .error {
+            border-color: red;
+        }
+        .success {
+            border-color: green;
+        }
+        #successMessage {
+            display: none;
+            text-align: center;
+            color: green;
+            font-size: 24px;
+            position: absolute;
+            top: 200px;
+        }
+
+        @media (max-width: 899px) {
+            .popup {
+                height: 540px;
+                border-radius: 15px;
+                width: 320px;
+            }
+            .exit {
+                margin: 12px 10px;
+            }
+            .docs {
+                width: 258px;
+                height: 35px;
+                top: 151px;
+                left: 29px;
+                z-index: 9;
+            }
+            .books {
+                width: 228px;
+                height: 163px;
+                top: 14px;
+                margin: 0 47px;
+                left: 0;
+            }
+            h1 {
+                font-size: 16.09pt;
+                left: 33px;
+                top: 215px;
+                margin: 0;
+                text-align: center;
+            }
+            .popup-form {
+                position: absolute;
+                display: inline-flex;
+                flex-direction: column;
+                gap: 0;
+                bottom: 27px;
+                right: 0;
+                margin: 0 19px;
+            }
+            label {
+                font-size: 9.4pt;
+            }
+            input {
+                height: 41.75px;
+                font-size: 12.88pt;
+                padding: 0 15px;
+            }
+            .submit-button {
+                width: 281.63px;
+                height: 57.13px;
+                font-size: 14pt;
+                margin-top: 13px;
+            }
+            .hand {
+                width: 28px;
+                height: 31px;
+            }
+            .pdf {
+                display: none;
+            }
+            .submit-button::before {
+                height: 57.13px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="successMessage">Заявка успешно отправлена!</div>
+    <button id="openPopup" class="popup-button"><span class="text-click">Кликни</span></button>
+    <div class="popup" id="popup">
+        <img class="exit" src="exit.png">
+        <div class="left-side">
+            <h1>Получите набор файлов</br>для руководителя:</h1>
+            <img  class="docs" src="icons.png">
+            <img class="books" src="books.png">
+        </div>
+        <form id="popupForm" class="popup-form">
+            <label>Введите Email для получения файлов:</label>
+            <input type="email" name="email" id="email" placeholder="E-mail">
+            <label>Введите телефон для подтверждения доступа:</label>
+            <input type="tel" name="phone" id="phone" placeholder="+7 (000) 000-00-00">
+            <button type="submit" class="submit-button" disabled><span class="text-button">Скачать файлы <img class="hand" src="hand.png"></span></button>
+            <div class="pdf"><span>PDF 4,7 MB</span><span>DOC 0,8 MB</span><span>XLS 1,2 MB</span></div>
+        </form>
+    </div>
+
+<script>
+
+         
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Создание попап с фоном
+        var openPopupButton = document.getElementById('openPopup');
+        var popup = document.getElementById('popup');
+        var overlay = document.createElement('div');
+        overlay.className = 'overlay';
+
+        openPopupButton.addEventListener('click', function() {
+            document.body.appendChild(overlay);
+            popup.style.display = 'block';
+        });
+
+        overlay.addEventListener('click', function() {
+            popup.style.display = 'none';
+            document.body.removeChild(overlay);
+        });
+
+        var exitButton = document.querySelector('.exit');
+        exitButton.addEventListener('click', function() {
+            popup.style.display = 'none';
+            document.body.removeChild(overlay);
+        });
+
+        // Маска ввода телефона
+        var phoneInput = document.getElementById('phone');
+        var emailInput = document.getElementById('email');
+        var isMaskActive = false;
+
+        phoneInput.addEventListener('input', function() {
+            var inputText = phoneInput.value;
+            var cleaned = inputText.replace(/\D/g, '');
+            var formatted = '';
+
+            if (cleaned.length > 11) {
+                cleaned = cleaned.substr(0, 11);
+            }
+            if (!isMaskActive) {
+                if (cleaned.length > 0) {
+                    cleaned = '7' + cleaned;
+                    isMaskActive = true;
+                }
+            }
+            if (cleaned.length > 0) {
+                formatted = '+7 (' + cleaned.substring(1, 4) + ') ' + cleaned.substring(4, 7) + '-' + cleaned.substring(7, 9) + '-' + cleaned.substring(9);
+            }
+
+            phoneInput.value = formatted;
+            // Обводка input красным или зеленым, если введено не по маске
+            if (cleaned.length === 11) {
+                phoneInput.classList.remove('error');
+                phoneInput.classList.add('success');
+            } else {
+                phoneInput.classList.remove('success');
+                phoneInput.classList.add('error');
+            }
+        });
+
+        // Очистка поля телефона при стирании
+        phoneInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Backspace') {
+                var inputText = phoneInput.value;
+                if (inputText.length > 0) {
+                    phoneInput.select();
+                    document.execCommand('cut');
+                    isMaskActive = false;
+                }
+            }
+        });
+
+        // Маска ввода E-mail
+        emailInput.addEventListener('input', function() {
+            var emailValue = emailInput.value;
+            var isValidEmail = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(emailValue);
+
+            // Обводка input красным или зеленым, если введено не по маске
+            if (isValidEmail) {
+                emailInput.classList.remove('error');
+                emailInput.classList.add('success');
+            } else {
+                emailInput.classList.remove('success');
+                emailInput.classList.add('error');
+            }
+        });
+
+        // Подключение обработчика
+        var popupForm = document.getElementById('popupForm');
+        var submitButton = popupForm.querySelector('[type="submit"]');
+        
+        popupForm.addEventListener('input', function() {
+            var emailInput = popupForm.querySelector('[name="email"]').value;
+            var phoneInputValue = phoneInput.value.replace(/\D/g, '');
+          
+            // Проверяем E-mail по маске и активируем кнопку заказать
+            if (isValidEmail(emailInput) && phoneInputValue.length === 11) {
+                submitButton.removeAttribute('disabled');
+            } else {
+                submitButton.setAttribute('disabled', 'disabled');
+            }
+        });
+
+        // Проверка корректности E-mail
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        popupForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Получение E-mail и телефона
+            var email = popupForm.querySelector('[name="email"]').value;
+            var phone = phoneInput.value.replace(/\D/g, '');
+
+            // Отправка данных на сервер
+            fetch('amo/amo.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: 'email=' + email + '&phone=' + phone
+            })
+            .then(function(response) {
+                if (response.ok) {
+                    console.log('Данные успешно отправлены на почту');
+
+                    popupForm.reset();
+                    popup.style.display = 'none';
+
+                    var successMessage = document.getElementById('successMessage');
+                    successMessage.style.display = 'block';
+
+                    document.body.removeChild(overlay);
+                } else {
+                    console.error('Ошибка при отправке данных');
+                }
+            })
+            .catch(function(error) {
+                console.error('Произошла ошибка: ' + error);
+            });
+
+  
+        });
+    });
+</script> 
+</body>
+</html>
